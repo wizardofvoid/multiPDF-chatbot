@@ -1,0 +1,78 @@
+
+
+========== PAGE 1 ==========
+
+Ayush Saraf
++ Vellore, India
+# sarafa736@gmail.com
+ +91 7004777571
+ï linkedin.com/in/saraf–ayush
+§ GitHub
+ Portfolio
+Ð Codolio
+Summary
+Growth-focused Computer Science student with proficiency in Python, Java, C++, and data structures. Skilled
+in building practical projects involving NLP techniques, Machine Learning, and Large Language Models.
+Currently in pre-final year at VIT, focused on acquiring Deep Learning expertise.
+Education
+Vellore Institute of Technology
+Vellore, India
+B.Tech in Computer Science (Core) | CGPA: 9.02
+Aug 2023 – Present
+Bhagwan Mahavir International School
+Gujarat, India
+Senior Secondary | Percentage: 83.6%
+2023
+L.P Savani School
+Gujarat, India
+Secondary | Percentage: 88.86%
+2021
+Skills
+Languages: Python, Java, C/C++, JavaScript, TypeScript, SQL
+Frameworks & Libraries: Scikit-learn, NumPy, Pandas, Matplotlib, Seaborn, OpenCV, Streamlit
+Platforms & Tools: Git, GitHub, VSCode, Cursor, Google Colab, Jupyter
+Soft Skills: Team management, Excellent communication, Event management
+Experience
+AI/ML Intern
+May 2025 – Jul 2025
+SentiAid
+• Cleaned and preprocessed large speech/text datasets for an Indian Sign Language (ISL) translator using Python,
+deep learning, keypoint detection, and pose-based animation.
+• Applied Pandas, Scikit-learn, and Regex to remove noise and align glosses with ASR outputs, improving training
+data quality.
+• Gained exposure to animation pipelines and AI for accessibility applications.
+Student Volunteer — Gravitas
+Aug 2024 – Sep 2024
+Vellore Institute of Technology
+• Coordinated key events at Gravitas (VIT’s annual tech fest), ensuring efficient planning and smooth execution.
+• Collaborated with a team of 50+ members to align goals, contributing to innovative promotional strategies that
+increased participant engagement by 150%.
+Projects
+Resume Feedback System | NLP, NLTK, TF-IDF, Python
+Oct 2025
+• Built an NLP-powered ATS scoring system combining dynamic skill-matching density (˜70% weight) and
+section/layout completeness (˜30% weight) for 1–100% explainability.
+• Used NLTK sentence tokenizer to segment resumes into 5 categories, with a 2-layer text extraction pipeline.
+• Implemented TF-IDF vectorisation (up to 1000 features) with cosine similarity to evaluate keyword relevance and
+ATS-friendliness.
+Student Performance Predictor | ML, RandomForest, LLaMA, Python
+Jul 2025
+• Developed an ML model using RandomForestClassifier to predict student pass/fail outcomes with 94.5%
+accuracy.
+• Preprocessed and engineered features from quiz, midterm, and assignment scores using Pandas and NumPy.
+
+
+========== PAGE 2 ==========
+
+• Integrated Meta’s LLaMA model to generate personalised performance insights and recommendations.
+E-Learning Platform | HTML, CSS, JavaScript
+Mar 2025
+• Built a full-featured e-learning platform with user authentication for secure access.
+Heart Disease Detection Model | Logistic Regression, RandomForest, Python
+Feb 2024
+• Trained an ML model using Logistic Regression and RandomForestClassifier to detect heart disease with 88.65%
+accuracy.
+Certifications
+Generative AI Workshop
+Mar 2025
+• Hands-on training in building generative AI models.

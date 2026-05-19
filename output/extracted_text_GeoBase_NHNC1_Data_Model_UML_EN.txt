@@ -1,0 +1,1510 @@
+
+
+========== PAGE 1 ==========
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+National Hydro Network, Canada, Level 1 
+Data Model 
+ 
+ 
+ 
+Edition 1.0 
+ 
+ 
+ 
+2004-08 
+ 
+ 
+Gouvernement du Canada 
+Ressources naturelles Canada 
+Centre canadien de la cartographie et d’observation de la Terre 
+ 
+ 
+Service à la clientèle de GéoGratis 
+Téléphone : +01-819-564-4857 
+ 
+1-800-661-2638 (Canada et États-Unis) 
+Télécopieur : +01-819-564-5698 
+Courriel : geoginfo@RNCan.gc.ca 
+URL : www.GeoGratis.gc.ca 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+========== PAGE 2 ==========
+
+ 
+Copyright Notice 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+© Her Majesty the Queen in Right of Canada, Department of Natural Resources. 
+All rights reserved. 
+ 
+GeoBase® 
+ 
+ 
+
+
+========== PAGE 3 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+iii 
+REVISION HISTORY 
+Date 
+Version 
+Description 
+September 2002 
+Draft 01 
+First draft for discussion with Nova Scotia 
+January 2003 
+Draft 
+Second draft after discussion with Nova Scotia and major review of the 
+hydro network model through:  
+ 
+Proposal of options 
+March 2003 
+Alpha 
+Draft version after discussion and decisions made concerning NHNC1 
+scope and content with Nova Scotia and British Columbia  
+July 2003 
+Draft 02 
+Draft version after discussion and decisions made concerning the 
+detailed NHNC1 model and content with Nova Scotia, British 
+Columbia, and the Yukon. Meeting in Victoria, May 2003. 
+December 2003 
+Draft 
+Integration of UML model for both LRS and Segmented views of the 
+NHNC1. 
+February 2004 
+Draft 
+English review; 
+Remove the UML model for the Segmented view. 
+May 2004 
+Draft 
+Update from the March Workshop comments. 
+August 2004 
+2004.1 
+The object metadata attribute « date » is renamed « validity_date » in 
+section 3.1.6.2 and at all other parts referring to object metadata. 
+A new Feature type value is added for inland water (see section 3.1.5) 
+FUTURE WORK 
+Key word 
+Description 
+ 
+ 
+ 
+
+
+========== PAGE 4 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+iv 
+TABLE OF CONTENTS 
+ 
+1 
+OVERVIEW ............................................................................................................................................ 6 
+2 
+LRS ........................................................................................................................................................ 6 
+2.1 
+LRS MODEL ...................................................................................................................................... 7 
+3 
+MODEL .................................................................................................................................................. 8 
+3.1 
+LRS MODEL ...................................................................................................................................... 9 
+3.1.1 
+Logical view ............................................................................................................................... 9 
+3.1.2 
+Hydro network.......................................................................................................................... 10 
+3.1.3 
+Hydro events............................................................................................................................ 11 
+3.1.4 
+Hydrographic ........................................................................................................................... 14 
+3.1.5 
+Toponymy (external package) ................................................................................................. 18 
+3.1.6 
+Metadata .................................................................................................................................. 19 
+ 
+ 
+ 
+
+
+========== PAGE 5 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+v 
+ABBREVIATIONS 
+LRM 
+Linear Reference Method 
+LRS 
+Linear Reference System 
+NHNC1 
+National Hydro Network, Canada, Level 1 
+NID 
+National Identifier 
+NRCan 
+Natural Resources Canada 
+ 
+TERMS AND DEFINITIONS 
+ 
+ 
+
+
+========== PAGE 6 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+6 
+Mandatory 
+Optional 
+Quantity of phenomenon 
+Number of characteristics 
+ 
+ 
+Optional 
+1 
+Overview 
+The data model can (and must) extend beyond the smallest common denominator obtained with the 
+partners.  The model must therefore contain two levels of information: mandatory data (black boxes) and 
+optional data (grey boxes).  Data homogeneity will thereby be ensured by a minimum set of data. Beyond 
+the minimum level, the model serves as a target for all partners.  Over the years, we will therefore work 
+towards raising the minimum and redefining new targets.  Minimum content will be defined for attributive 
+and geometric data (see Figure 1 – Specifications expansion). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 1 – Specifications expansion 
+2 
+LRS 
+ 
+The Linear Reference System (LRS) is considered the most viable approach for managing and 
+distributing geospatial information when several distinct organizations are involved (distributed approach).  
+ 
+This method makes it possible to divide a standard spatial object into two parts: the geometric and 
+attribute parts.  The geometric part (Network Linear Component in the NHNC1) describes the position of 
+the feature without describing its nature. The attribute part (or event) describes specific information 
+observed along its linear geometric representation. Event information does not alter the geometric 
+representation in any way. The event's position is given relatively from the beginning of the linear 
+geometric representation.  A Point Event is determined by a specific location, while a Linear Event is 
+defined by a starting and ending measurement.  Several Linear Methods (LRMs) can be used.  (They are 
+not discussed in this document). By using this approach we can share a common geometry while each 
+application can add their set of attributes (events) in relationship with the Water Network geometry.  
+ 
+
+
+========== PAGE 7 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+7 
+2.1 
+LRS model 
+ 
+Four packages constitute the NHNC1 : Hydro Network, Hydrographic, Hydro Events and Metadata. The 
+Hydro Network package contains the set of classes that form the linear network. The Hydrographic 
+package contains the set of classes that form the graphical representation of features related to the linear 
+network. The Hydro Event package contains attributive information that are referenced to Hydro Network 
+geometry.The Metadata package contains information that describes the data themselves (date, 
+accuracy, and so on). The portion of toponymy associated to Hydro feature data is part of the National 
+Toponymy Model. This model associates geometries with official names and the classes used from the 
+Toponymy Model are described in an external package called Toponymy for better understanding (issues 
+involving text placement on paper or computer screen are excluded from consideration at this point). 
+ 
+ 
+ 
+ 
+Hydro  
+Network 
+Hydro  
+Events 
+Metadata 
+Hydrography 
+Toponymy 
+(external 
+model) 
+Figure 2 – Packages in the NHNC1 LRS model 
+
+
+========== PAGE 8 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+8 
+ 
+3 
+Model 
+The model presented below include descriptions of five packages, including the description of 
+relationships between classes belonging to different packages and the toponymy external package. 
+ 
+
+
+========== PAGE 9 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+9 
+3.1 
+LRS model  
+3.1.1 
+Logical view  
+ 
+ 
+
+
+========== PAGE 10 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+10 
+ 
+3.1.2 
+Hydro network  
+cd Hydro Network
+Hydro Network
+«spatialDescriptiveEvol»
+NetworkLinearFlow
+- 
+Isolated:  boolean
+- 
+LevelPriority:  CL_ LevelPriority
+- 
+NetworkFlowType:  CL_Network Flow Type
+- 
+FlowDirection:  CL_DirectionFlag
+«spatialDescriptiveEvol»
+WaterBoundaryEntity
+«spatialDescriptiveEvol»
+Shoreline
+- 
+ShorelineWaterLevel:  CL_Shoreline Water Level
+«spatialDescriptiveEvol»
+Bank
+- 
+Isolated:  boolean
+- 
+IslandNID:  DT_UUID
+- 
+Permanency:  CL_Permanency
+- 
+WaterDefinition:  CL_Water Definition
+- 
+WaterbodyNID:  DT_UUID
+«spatialDescriptiveEvol»
+Littoral
+- 
+IslandNID:  DT_UUID
+LR_Element
+«type»
+Network Abstract Model::
+NetworkLinearElement
++ 
+geometry:  GB_Curve [0..1]
+«type»
+Network Abstract Model::
+NetworkPointElement
++ 
+geometry:  GB_Point
+Name:
+Hydro Network
+Author:
+NRN/NHN Team
+Version:
+1.0
+Created:
+2003-03-07 08:42:38
+Updated:
+2004-06-02 17:00:40
+«spatialDescriptiveEvol»
+HydroJunction
+- 
+JunctionType:  CL_JunctionType
+«type»
+Network Abstract Model::
+NetworkComponent
++ 
+nid:  DT_UUID
+«spatialDescriptiveEvol»
+Delimiter
+- 
+DelimiterType:  CL_DelimiterType
+- 
+Waterbody1NID:  DT_UUID
+- 
+Waterbody2NID:  DT_UUID
+- 
+IslandNID:  DT_UUID
+Code List
+«CodeList»
+CodeList::CL_DelimiterType
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Contiguous Water Region = 1:  
++ 
+Tidal = 2:  
++ 
+Coastline = 3:  
++ 
+Water Region Limit at ProvTerr Limit = 4:  
++ 
+Working Unit Region Limit = 5:  
+«CodeList»
+CodeList::CL_JunctionType
++ 
+None = 0:  
++ 
+Network Linear Flow = 1:  
++ 
+Network Linear Flow and Shoreline Element = 2:  
++ 
+Water Boundary Element = 3:  
++ 
+Start and End of Network Linear Flow = 4:  
++ 
+NavProvTer = 5:  
++ 
+Network Linear Flow and Delimiter = 6:  
++ 
+Start of Network connected to Bank = 7:  
+«CodeList»
+CodeList::CL_Water 
+Definition
++ 
+None = 0:  
++ 
+Canal = 1:  
++ 
+Conduit = 2:  
++ 
+Ditch = 3:  
++ 
+Lake = 4:  
++ 
+Reservoir = 5:  
++ 
+Watercourse = 6:  
++ 
+Tidal River = 7:  
++ 
+Liquid Waste = 8:  
++ 
+Pond = 9:  
+«CodeList»
+CodeList::CL_ 
+LevelPriority
++ 
+Primary = 1:  
++ 
+Secondary = 2:  
+«CodeList»
+CodeList::
+CL_Permanency
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Permanent = 1:  
++ 
+Intermittent = 2:  
+«CodeList»
+Code List::
+CL_DirectionFlag
++ 
+same direction = 1:  
++ 
+opposite direction = 2:  
++ 
+N/A = 3:  
+«CodeList»
+CodeList::
+CL_Network Flow 
+Type
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Observed = 1:  
++ 
+Inferred = 2:  
++ 
+Constructed = 3:  
+0..*
+starts
+1
+0..*
+ends
+1
+ 
+
+
+========== PAGE 11 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+11 
+3.1.3 
+Hydro events  
+cd Hydro Events
+Hydro Events
+Name:
+Hydro Events
+Author:
+NRN/NHN Team
+Version:
+1.0
+Created:
+2003-03-07 08:42:58
+Updated:
+2004-06-02 17:00:52
+«descriptiveEvolution»
+PointEvents::HydroPointEvent
+«type»
+LRS Abstract Model::LinearEvent
++ 
+startPosition:  LR_PositionExpression
++ 
+endPosition:  LR_PositionExpression
+«type»
+LRS Abstract Model::PointEvent
++ 
+atPosition:  LR_PositionExpression
+«descriptiveEvolution»
+LineEvents::HydroLineEvent
+«type»
+LRS Abstract 
+Model::Event
++ 
+nid:  DT_UUID
+LR_Element
+NetworkComponent
+«type»
+Network Abstract Model::
+NetworkLinearElement
++ 
+geometry:  GB_Curve [0..1]
+0..1
+references
+0..*
+ 
+ 
+
+
+========== PAGE 12 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+12 
+3.1.3.1 
+Point Events 
+cd PointEvents
+Point Events
+LR_Element
+NetworkComponent
+«type»
+Network Abstract Model::NetworkLinearElement
++ 
+geometry:  GB_Curve [0..1]
+«type»
+LRS Abstract 
+Model::Event
++ 
+nid:  DT_UUID
+«descriptiveEvolution»
+ManMadePointEvent
+- 
+HydrographicEntityClassName:  char
+- 
+ManMadeHydrographicEntityNID:  UUID
+- 
+ManMadeStatus:  CL_Manmade Status
+- 
+ManMadeType:  CL_Manmade Type
+«descriptiveEvolution»
+ExternalGeometryEvent
+- 
+ExternalAgency:  char
+- 
+ExternalID:  DT_UUID
+«descriptiveEvolution»
+ExternalPointEvent
+- 
+ExternalAgency:  char
+- 
+ExternaID:  DT_UUID
+- 
+EventName:  char
+Name:
+PointEvents
+Author:
+NRN/NHN Team
+Version:
+1.0
+Created:
+2004-03-30 09:48:28
+Updated:
+2004-06-02 17:01:04
+«descriptiveEvolution»
+HydroPointEvent
+«type»
+LRS Abstract Model::PointEvent
++ 
+atPosition:  LR_PositionExpression
+«descriptiveEvolution»
+ObstaclePointEvent
+- 
+HydrographicEntityClassName:  char
+- 
+HydrographicObstacleEntityNID:  UUID
+- 
+ObstacleType:  CL_Obstacle Type
+Code List
+«CodeList»
+CodeList::
+CL_Manmade Type
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Dam = 1:  
++ 
+Dock = 2:  
++ 
+Wharf = 3:  
++ 
+Breakwater = 4:  
++ 
+Dike/Levee = 5:  
++ 
+Lock Gate = 6:  
++ 
+Boat Ramp = 7:  
++ 
+Fish Ladder =8:  
++ 
+Slip = 9:  
+«CodeList»
+CodeList::
+CL_Manmade Status
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Operational = 1:  
++ 
+Abandoned = 2:  
+«CodeList»
+CodeList::CL_Obstacle Type
++ 
+Unknown = -1:  
++ 
+Falls = 1:  
++ 
+Rapids = 2:  
++ 
+Reef = 3:  
++ 
+Rocks = 4:  
++ 
+Disappearing stream = 5:  
++ 
+Exposed shipwreck = 6:  
++ 
+Ford = 7:  
++ 
+Other = 8:  
+0..1
+references
+0..*
+ 
+ 
+
+
+========== PAGE 13 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+13 
+3.1.3.2 
+Line Events 
+cd LineEvents
+Line Events
+«descriptiveEvolution»
+ObstacleLineEvent
+- 
+HydrographicEntityClassName:  char
+- 
+HydrographicObstacleEntityNID:  UUID
+- 
+ObstacleType:  CL_Obstacle Type
+«descriptiveEvolution»
+ManMadeLineEvent
+- 
+HydrographicEntityClassName:  char
+- 
+ManMadeHydrographicEntityNID:  UUID
+- 
+ManMadeStatus:  CL_Manmade Status
+- 
+ManMadeType:  CL_Manmade Type
+«descriptiveEvolution»
+HydroLineEvent
+«descriptiveEvolution»
+FlowPropertyEvent
+- 
+WaterDefinition:  CL_Water Definition
+«descriptiveEvolution»
+ExternalLineEvent
+- 
+ExternalAgency:  char
+- 
+ExternalID:  DT_UUID
+- 
+EventName:  char
+LR_Element
+NetworkComponent
+«type»
+Network Abstract Model::
+NetworkLinearElement
++ 
+geometry:  GB_Curve [0..1]
+«type»
+LRS Abstract 
+Model::Event
++ 
+nid:  DT_UUID
+«type»
+LRS Abstract Model::LinearEvent
++ 
+startPosition:  LR_PositionExpression
++ 
+endPosition:  LR_PositionExpression
+Code List
+«CodeList»
+CodeList::CL_Water 
+Definition
++ 
+None = 0:  
++ 
+Canal = 1:  
++ 
+Conduit = 2:  
++ 
+Ditch = 3:  
++ 
+Lake = 4:  
++ 
+Reservoir = 5:  
++ 
+Watercourse = 6:  
++ 
+Tidal River = 7:  
++ 
+Liquid Waste = 8:  
++ 
+Pond = 9:  
+«CodeList»
+CodeList::
+CL_Manmade Status
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Operational = 1:  
++ 
+Abandoned = 2:  
+«CodeList»
+CodeList::
+CL_Manmade Type
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Dam = 1:  
++ 
+Dock = 2:  
++ 
+Wharf = 3:  
++ 
+Breakwater = 4:  
++ 
+Dike/Levee = 5:  
++ 
+Lock Gate = 6:  
++ 
+Boat Ramp = 7:  
++ 
+Fish Ladder =8:  
++ 
+Slip = 9:  
+«CodeList»
+CodeList::CL_Obstacle Type
++ 
+Unknown = -1:  
++ 
+Falls = 1:  
++ 
+Rapids = 2:  
++ 
+Reef = 3:  
++ 
+Rocks = 4:  
++ 
+Disappearing stream = 5:  
++ 
+Exposed shipwreck = 6:  
++ 
+Ford = 7:  
++ 
+Other = 8:  
+0..1
+references
+0..*
+Name:
+Package:
+Version:
+Author:
+LineEvents
+LineEvents
+1.0
+NRN/NHN Team
+ 
+
+
+========== PAGE 14 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+14 
+3.1.4 
+Hydrographic 
+There are implied associations with all hydrographic features and the Hydro Network could be defined 
+explicitly through spatial analysis. 
+cd Hydrographic
+Hydrographic
+«spatialDescriptiveEvol»
+HydrographicEntity
+- 
+NID:  DT_UUID
+«spatialDescriptiveEvol»
+ManMadeHydrographicEntity
+- 
+ManMadeType:  CL_Manmade Type
+- 
+ManMadeStatus:  CL_Manmade Status
+«spatialDescriptiveEvol»
+HydrographicObstacleEntity
+- 
+ObstacleType:  CL_Obstacle Type
+«DescriptiveEvol»
+SingleLineWatercourse
+- 
+WaterDefinition:  CL_Water Definition
+- 
+Permanency:  CL_Permanency
+- 
+Isolated:  boolean
+- 
+geometry:  GB_Curve
+«spatialDescriptiveEvol»
+Island
+- 
+CoastalIsland:  boolean
+- 
+SandIsland:  CL_SandIsland
+- 
+geometry:  GB_Surface
++ 
+Island() : GM_Ring
+«spatialDescriptiveEvol»
+WaterBody
+- 
+Isolated:  boolean
+- 
+Permanency:  CL_Permanency
+- 
+WaterDefinition:  CL_Water Definition
+- 
+geometry:  GB_Surface
++ 
+WaterRegion() : GM_SurfaceBoundary
+WaterRegion polygons are 
+formed according to 
+WaterBoundaryFeatures from 
+the Network package.
+Island polygons are formed 
+according to 
+WaterBoundaryFeatures from the
+Network package.
+«DescriptiveEvol»
+Coastline
+- 
+ShorelineWaterLevel:  CL_Shoreline Water Level
+Name:
+Hydrographic
+Author:
+NRN/NHN Team
+Version:
+1.0
+Created:
+2003-03-07 08:43:42
+Updated:
+2004-06-02 17:01:27
+«type»
+Object MD::ObjectMetadata
++ 
+nid:  DT_UUID
++ 
+validity_date:  DT_Date
++ 
+acquisitionTechnique:  CL_AcquisitionTechnique [0..1]
++ 
+datasetName:  Char(50)
++ 
+planimetricAccuracy:  Int
++ 
+provider:  CL_Provider
++ 
+completelyCover:  Boolean
+«descriptiveEvolution»
+Object MD::
+CreationMetadata
+«descriptiveEvolution»
+Object MD::
+RevisionMetadata
+Shoreline
+«spatialDescriptiveEvol»
+Hydro Network::Littoral
+- 
+IslandNID:  DT_UUID
+Code List
+«CodeList»
+CodeList::
+CL_Manmade Type
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Dam = 1:  
++ 
+Dock = 2:  
++ 
+Wharf = 3:  
++ 
+Breakwater = 4:  
++ 
+Dike/Levee = 5:  
++ 
+Lock Gate = 6:  
++ 
+Boat Ramp = 7:  
++ 
+Fish Ladder =8:  
++ 
+Slip = 9:  
+«CodeList»
+CodeList::
+CL_Manmade 
+Status
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Operational = 1:  
++ 
+Abandoned = 2:  
+«CodeList»
+CodeList::CL_Obstacle Type
++ 
+Unknown = -1:  
++ 
+Falls = 1:  
++ 
+Rapids = 2:  
++ 
+Reef = 3:  
++ 
+Rocks = 4:  
++ 
+Disappearing stream = 5:  
++ 
+Exposed shipwreck = 6:  
++ 
+Ford = 7:  
++ 
+Other = 8:  
+«CodeList»
+CodeList::CL_Water 
+Definition
++ 
+None = 0:  
++ 
+Canal = 1:  
++ 
+Conduit = 2:  
++ 
+Ditch = 3:  
++ 
+Lake = 4:  
++ 
+Reservoir = 5:  
++ 
+Watercourse = 6:  
++ 
+Tidal River = 7:  
++ 
+Liquid Waste = 8:  
++ 
+Pond = 9:  
+«CodeList»
+CodeList::
+CL_Permanency
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Permanent = 1:  
++ 
+Intermittent = 2:  
+«CodeList»
+CodeList::
+CL_SandIsland
+- 
+Unknown = -1:  
+- 
+None = 0:  
+- 
+No = 1:  
+- 
+Yes = 2:  
+«inner bound»
+1..2
++is described by
+0..*
++describes
+ 
+ 
+ 
+
+
+========== PAGE 15 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+15 
+3.1.4.1 
+Hydrographic Water Areas 
+cd Hydrographic Water Areas 
+Hydrographic Water Areas 
+«spatialDescriptiveEvol» 
+WaterBody 
+-  Isolated:  boolean 
+-  Permanency:  CL_Permanency 
+-  WaterDefinition:  CL_Water Definition 
+-  geometry:  GB_Surface 
++  WaterBody() : GM_SurfaceBoundary 
+«spatialDescriptiveEvol» 
+Island 
+-  CoastalIsland:  boolean 
+-  SandIsland:  CL_SandIsland 
+-  geometry:  GB_Surface 
++  Island() : GM_Ring 
+«spatialDescriptiveEvol» 
+Hydro Network:: 
+WaterBoundaryEntity 
+Name: 
+Hydrographic Water Areas 
+Author: 
+NRN/NHN Team 
+Version: 
+1.0 
+Created: 
+2004-04-21 12:57:35 
+Updated: 2004-05-05 13:29:57 
+LR_Element 
+NetworkComponent 
+«type» 
+Network Abstract Model:: 
+NetworkLinearElement 
++  geometry:  GB_Curve [0..1] 
+«spatialDescriptiveEvol» 
+HydrographicEntity 
+-  NID:  DT_UUID 
+Code List 
+«CodeList» 
+CodeList:: 
+CL_Permanency 
++  Unknown = -1:   
++  None = 0:   
++  Permanent = 1:   
++  Intermittent = 2:   
+«CodeList» 
+CodeList::CL_Water  
+Definition 
++  None = 0:   
++  Canal = 1:   
++  Conduit = 2:   
++  Ditch = 3:   
++  Lake = 4:   
++  Reservoir = 5:   
++  Watercourse = 6:   
++  Tidal River = 7:   
++  Liquid Waste = 8:   
++  Pond = 9:   
+«bound» 
+«inner bound» 
+«outer 
+bound» 
+ 
+
+
+========== PAGE 16 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+16 
+ 
+3.1.4.2 
+Hydrographic Obstacle 
+cd HydrographicObstacleEntity
+Hydrographic Obstacle Entity
+«spatialDescriptiveEvol»
+HydrographicObstaclePolygonEntity
++ 
+geometry:  GB_Surface
+«spatialDescriptiveEvol»
+HydrographicObstacleLineEntity
++ 
+geometry:  GB_Curve
+«spatialDescriptiveEvol»
+HydrographicObstaclePointEntity
++ 
+geometry:  GB_Point
+Code List
+Name:
+HydrographicObstacleEntity
+Author:
+NRN/NHN Team
+Version:
+1.0
+Created:
+2004-04-06 10:49:50
+Updated:
+2004-06-02 17:01:44
+«spatialDescriptiveEvol»
+HydrographicEntity
+- 
+NID:  DT_UUID
+«spatialDescriptiveEvol»
+HydrographicObstacleEntity
+- 
+ObstacleType:  CL_Obstacle Type
+«CodeList»
+CodeList::CL_Obstacle Type
++ 
+Unknown = -1:  
++ 
+Falls = 1:  
++ 
+Rapids = 2:  
++ 
+Reef = 3:  
++ 
+Rocks = 4:  
++ 
+Disappearing stream = 5:  
++ 
+Exposed shipwreck = 6:  
++ 
+Ford = 7:  
++ 
+Other = 8:  
+ 
+ 
+
+
+========== PAGE 17 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+17 
+3.1.4.3 
+Manmade Hydrographic 
+cd ManmadeHydrographicEntity
+ManmadeHydrographic
+Name:
+ManmadeHydrographicEntity
+Author:
+NRN/NHN Team
+Version:
+1.0
+Created:
+2004-04-06 10:38:27
+Updated:
+2004-06-02 17:01:53
+«spatialDescriptiveEvol»
+HydrographicEntity
+- 
+NID:  DT_UUID
+«spatialDescriptiveEvol»
+ManMadeHydrographicEntity
+- 
+ManMadeType:  CL_Manmade Type
+- 
+ManMadeStatus:  CL_Manmade Status
+«spatialDescriptiveEvol»
+ManMadeHydrographicPointEntity
++ 
+geometry:  GB_Point
+«spatialDescriptiveEvol»
+ManMadeHydrographicLineEntity
+- 
+geometry:  GB_Curve
+«spatialDescriptiveEvol»
+ManMadeHydrographicPolygonEntity
++ 
+geometry:  GB_Surface
+Code List
+«CodeList»
+CodeList::
+CL_Manmade Type
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Dam = 1:  
++ 
+Dock = 2:  
++ 
+Wharf = 3:  
++ 
+Breakwater = 4:  
++ 
+Dike/Levee = 5:  
++ 
+Lock Gate = 6:  
++ 
+Boat Ramp = 7:  
++ 
+Fish Ladder =8:  
++ 
+Slip = 9:  
+«CodeList»
+CodeList::
+CL_Manmade Status
++ 
+Unknown = -1:  
++ 
+None = 0:  
++ 
+Operational = 1:  
++ 
+Abandoned = 2:  
+ 
+ 
+
+
+========== PAGE 18 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+18 
+3.1.5 
+Toponymy (external package)  
+ 
+cd Toponymy Model
+Toponymy Model
+Name:
+Toponymy Model
+Author:
+Michelle Poirier
+Version:
+1.0
+Created:
+2004-04-13 14:49:26
+Updated:
+2004-08-30 12:04:08
+«descriptiveEvolution»
+ToponymyCollection
+- 
+NID:  DT_UUID
+- 
+Feature_ID:  DT_UUID
+- 
+DB Name:  Int
+- 
+AssociationDate:  DT_Date
+- 
+NominalScale:  Int
+- 
+MinScale:  Int
+- 
+MaxScale:  Int
+Traversal
+«descriptiveEvolution»
+HydroTraversal
+- 
+NID:  UUID
+- 
+geometry:  GB_CompositeCurve
+LR_Element
+NetworkComponent
+«type»
+Network Abstract Model::
+NetworkLinearElement
++ 
+geometry:  GB_Curve [0..1]
+«spatialDescriptiveEvol»
+Hydro Network::NetworkLinearFlow
+- 
+Isolated:  boolean
+- 
+LevelPriority:  CL_ LevelPriority
+- 
+NetworkFlowType:  CL_Network Flow Type
+- 
+FlowDirection:  CL_DirectionFlag
+«spatialDescriptiveEvol»
+NamedFeature
+- 
+NID:  DT_UUID
+- 
+FeatureType:  CL_Feature Type
+- 
+RelatedNID:  DT_UUID
+«type»
+Object MD::ObjectMetadata
++ 
+nid:  DT_UUID
++ 
+validity_date:  DT_Date
++ 
+acquisitionTechnique:  CL_AcquisitionTechnique [0..1]
++ 
+datasetName:  Char(50)
++ 
+planimetricAccuracy:  Int
++ 
+provider:  CL_Provider
++ 
+completelyCover:  Boolean
+«descriptiveEvolution»
+Object MD::
+CreationMetadata
+«descriptiveEvolution»
+Object MD::
+RevisionMetadata
+«spatialDescriptiveEvol»
+Hydrographic::
+HydrographicEntity
+- 
+NID:  DT_UUID
+«spatialDescriptiveEvol»
+NamedPointFeature
++ 
+geometry:  GB_Point
+«spatialDescriptiveEvol»
+NamedLineFeature
++ 
+geometry:  GB_Curve
+«spatialDescriptiveEvol»
+NamedPolygonFeature
+- 
+geometry:  GB_Surface
+Code List
+«CodeList»
+CodeList::CL_Feature Type
++ 
+MarineWaterbody = 1:  Int
++ 
+FaultLine = 2:  Int
++ 
+Landscape = 3:  Int
++ 
+MassIce = 4:  Int
++ 
+Mountains = 5:  Int
++ 
+ProjectionOfLand = 6:  Int
++ 
+UnderseaFeature = 7:  Int
+- 
+InlandWater = 8:  Int
+1..2
++is described by
+0..*
++describes
+1..*
++defines
+1..*
++is defined by
+1..*
++defines
+1..*
++is defined by
+1..*
++defines
+1..*
++is defined by
+uses geometry of
+1..2
++is described by
+0..*
++describes
+
+
+========== PAGE 19 ==========
+
+National Hydro Network, Data Model – Edition 1.0 
+2004-06 
+GeoBase® 
+19 
+ 
+3.1.6 
+Metadata 
+3.1.6.1 
+Polygon Metadata 
+cd Polygon MD
+Polygon Metadata
+«type»
+Polygon MD::PolygonMetadata
++ 
+nid:  UUID
++ 
+geometry:  GB_Surface
++ 
+validityDateOfGeometry:  DateInterval
++ 
+resultantPlanimetricAccuracy:  AccuracyInterval
++ 
+resultantAltimetricAccuracy:  AccuracyInterval [0..1]
++ 
+provinceName:  ProvinceName
++ 
+StandardVersion:  Char(6)
++ 
+comments:  Char (256) [0..1]
+«type»
+Polygon MD::ConcernedFeatures
++ 
+FeatureName:  Char(256)
+0..*
+1
+ 
+ 
+3.1.6.2 
+Object Metadata  
+cd NHN LRS Profile Global Model
+«type»
+Object MD::ObjectMetadata
++ 
+nid:  DT_UUID
++ 
+validity_date:  DT_Date
++ 
+acquisitionTechnique:  CL_AcquisitionTechnique [0..1]
++ 
+datasetName:  Char(50)
++ 
+planimetricAccuracy:  Int
++ 
+provider:  CL_Provider
++ 
+completelyCover:  Boolean
+ 
+ 
+ 
+  
