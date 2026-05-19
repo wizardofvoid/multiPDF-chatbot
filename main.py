@@ -62,7 +62,7 @@ def main():
     prompt = ChatPromptTemplate.from_template(
         """Answer the user's question based on the context provided below.
         If the answer is not in the context, say "Question out of context", 
-        then you can search the web for the answer, if answer is not available say "I don't know"
+        then you can answer according to you, if answer is not available say "I don't know"
         
         Previous conversation:
         {history}
