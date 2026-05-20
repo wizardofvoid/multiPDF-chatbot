@@ -25,7 +25,7 @@ def extract_text_image(img_path: str) -> str:
     response = _get_client().models.generate_content(
         model="gemini-2.5-flash",
         contents=[
-            "Extract all text from this image accurately.",
+            "Extract all text from this image accurately. Return only the visible text, no commentary, no markdown unless present in the image",
             img,
         ],
     )

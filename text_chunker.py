@@ -98,33 +98,37 @@ def create_and_save_vectorstore(chunks: list[str]):
         print(f"\n[ERROR] FAISS creation failed: {e}")
         return None
 
-def main():
+def main() -> bool:
     # 1. Chunk the text
     chunks = chunk_all_text_files(INPUT_DIR, CHUNK_SIZE, CHUNK_OVERLAP)
-    
+
     if not chunks:
-        return
+        print("[ERROR] No chunks to index. Check output/*.txt (run extract_text.py first).")
+        return False
 
     print(f"\n[SUCCESS] Total chunks generated: {len(chunks)}")
 
     # 2. Generate Embeddings & Save to FAISS
     vectorstore = create_and_save_vectorstore(chunks)
-    
+
+    if not vectorstore:
+        return False
+
     # 3. Test the vector store with a Similarity Search
-    if vectorstore:
-        print("\n" + "="*50)
-        print("[TEST] Running a sample similarity search...")
-        
-        # NOTE: You can change this test query to match whatever is in your PDF!
-        query = "What is this document about?"
-        print(f"Query: '{query}'\n")
-        
-        results = vectorstore.similarity_search(query, k=2)
-        
-        for i, result in enumerate(results):
-            print(f"--- RESULT {i+1} ---")
-            print(result.page_content)
-            print("-" * 20 + "\n")
+    print("\n" + "=" * 50)
+    print("[TEST] Running a sample similarity search...")
+
+    query = "What is this document about?"
+    print(f"Query: '{query}'\n")
+
+    results = vectorstore.similarity_search(query, k=2)
+
+    for i, result in enumerate(results):
+        print(f"--- RESULT {i+1} ---")
+        print(result.page_content)
+        print("-" * 20 + "\n")
+
+    return True
 
 if __name__ == "__main__":
     main()
