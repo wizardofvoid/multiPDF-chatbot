@@ -74,16 +74,33 @@ def create_and_save_vectorstore(chunks: list[str]):
         return None
 
     try:
-        # Workaround: The LangChain Google GenAI library currently has a bug where 
-        # embed_documents silently truncates long batches. We embed one-by-one instead.
+        # Embed chunks in parallel using ThreadPoolExecutor to avoid a bug in langchain-google-genai
+        # where embed_documents silently truncates long batches.
         import sys
-        embeddings_list = []
-        for i, chunk in enumerate(chunks):
-            sys.stdout.write(f"\rEmbedding chunk {i+1}/{len(chunks)}...")
-            sys.stdout.flush()
-            emb = embeddings_model.embed_query(chunk)
-            embeddings_list.append(emb)
-        print("\n[INFO] All embeddings generated successfully.")
+        import concurrent.futures
+        
+        embeddings_list = [None] * len(chunks)
+        print(f"[INFO] Generating embeddings for {len(chunks)} chunks in parallel...")
+
+        def embed_single_chunk(item):
+            idx, chunk = item
+            for attempt in range(3):
+                try:
+                    return idx, embeddings_model.embed_query(chunk)
+                except Exception as e:
+                    if attempt == 2:
+                        print(f"\n[ERROR] Failed to embed chunk {idx+1}: {e}")
+                        raise e
+                    import time
+                    time.sleep(1)
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            results = list(executor.map(embed_single_chunk, enumerate(chunks)))
+            
+        for idx, emb in results:
+            embeddings_list[idx] = emb
+            
+        print("[INFO] All embeddings generated successfully.")
         
         # Create FAISS vector store from the manually generated embeddings
         text_embeddings = list(zip(chunks, embeddings_list))
