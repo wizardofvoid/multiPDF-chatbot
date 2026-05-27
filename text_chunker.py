@@ -15,11 +15,8 @@ load_dotenv()
 # =========================================================
 # CONFIG
 # =========================================================
-INPUT_DIR = "output"
-CHUNK_SIZE = 500
-CHUNK_OVERLAP = 100
-EMBEDDING_MODEL = "gemini-embedding-2"
-VECTORSTORE_DIR = "faiss_index"
+from config import OUTPUT_DIR, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL, VECTORSTORE_DIR
+INPUT_DIR = OUTPUT_DIR
 
 def chunk_all_text_files(input_dir: str, chunk_size: int, chunk_overlap: int):
     """

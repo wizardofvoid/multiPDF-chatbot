@@ -11,10 +11,8 @@ import image_text
 # =========================================================
 # CONFIG
 # =========================================================
-INPUT_DIR = "inputPDF"
-OUTPUT_DIR = "output"
-OUTPUT_FILE = "output.txt"
-MIN_IMAGE_SIZE = 150
+from config import INPUT_DIR, OUTPUT_DIR, OUTPUT_TEXT, MIN_IMAGE_SIZE
+OUTPUT_FILE = OUTPUT_TEXT.name
 
 
 def extract_page_hybrid(page, doc, temp_dir: Path, skip_ocr: bool = False) -> str:

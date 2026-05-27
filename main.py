@@ -7,7 +7,6 @@ from rag_agent import RAGAgent
 def get_agent() -> RAGAgent:
     return RAGAgent()
 
-
 def main():
     st.set_page_config(page_title="PDF Study Assistant", page_icon="📚", layout="wide")
     st.title("📚 PDF Study Assistant")
@@ -131,18 +130,7 @@ def main():
         st.markdown(question)
 
     with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            result = agent.ask(question, session_id=session_id)
-            if result.error:
-                answer = f"[ERROR] {result.error}"
-            else:
-                answer = result.answer
-            st.markdown(answer)
-
-            if result.context_chunks and st.checkbox("Show retrieved context", key="show_ctx"):
-                for i, chunk in enumerate(result.context_chunks, 1):
-                    st.markdown(f"**Chunk {i}**")
-                    st.text(chunk[:500] + ("..." if len(chunk) > 500 else ""))
+        answer = st.write_stream(agent.ask_stream(question, session_id=session_id))
 
     st.session_state["messages"].append({"role": "assistant", "content": answer})
 

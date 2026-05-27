@@ -134,3 +134,23 @@ class RAGAgent:
             return ChatResult(answer=answer, context_chunks=chunks)
         except Exception as e:
             return ChatResult(answer="", error=str(e))
+
+    def ask_stream(self, question: str, session_id: str = "default_session"):
+        if not self.index_ready():
+            yield "[ERROR] No search index found. Run extraction and index build first."
+            return
+
+        try:
+            vectorstore = self._load_vectorstore()
+            chain = self._load_chain()
+            docs = vectorstore.similarity_search(question, k=RETRIEVAL_K)
+            chunks = [doc.page_content for doc in docs]
+            context_text = "\n\n".join(chunks)
+            for chunk in chain.stream(
+                {"input": question, "context": context_text},
+                config={"configurable": {"session_id": session_id}},
+            ):
+                yield chunk
+        except Exception as e:
+            yield f"[ERROR] {str(e)}"
+
